@@ -1,0 +1,290 @@
+[
+  {
+    "id": "01",
+    "title": "Welcome the Salmon",
+    "category": "Indigenous",
+    "file": "01-welcome-the-salmon.html",
+    "thumb": "thumbs/01.jpg",
+    "curriculum_link": "FPPL: learning supports the well-being of the land and community; Gr 3 Social Studies: Indigenous peoples' connection to the land.",
+    "image_size": [
+      1011,
+      1264
+    ]
+  },
+  {
+    "id": "02",
+    "title": "Thank You, Cedar Tree",
+    "category": "Indigenous",
+    "file": "02-thank-you-cedar-tree.html",
+    "thumb": "thumbs/02.jpg",
+    "curriculum_link": "FPPL: learning involves recognizing the consequences of our actions; Gr 1 Science: living things.",
+    "image_size": [
+      1011,
+      1264
+    ]
+  },
+  {
+    "id": "03",
+    "title": "Canoe Day",
+    "category": "Indigenous",
+    "file": "03-canoe-day.html",
+    "thumb": "thumbs/03.jpg",
+    "curriculum_link": "Gr 1-2 Social Studies: families and communities; FPPL: learning is holistic, reflexive and relational.",
+    "image_size": [
+      941,
+      1176
+    ]
+  },
+  {
+    "id": "04",
+    "title": "Berry Picking Day",
+    "category": "Indigenous",
+    "file": "04-berry-picking-day.html",
+    "thumb": "thumbs/04.jpg",
+    "curriculum_link": "Gr 3 Social Studies: Indigenous ways of gathering food; Gr 1 Science: plants and the seasons.",
+    "image_size": [
+      986,
+      1233
+    ]
+  },
+  {
+    "id": "05",
+    "title": "Storytelling Circle",
+    "category": "Indigenous",
+    "file": "05-storytelling-circle.html",
+    "thumb": "thumbs/05.jpg",
+    "curriculum_link": "ELA Gr 1-3: oral stories and listening; FPPL: learning is embedded in memory, history and story.",
+    "image_size": [
+      1132,
+      1264
+    ]
+  },
+  {
+    "id": "06",
+    "title": "Fall Forest Walk",
+    "category": "Indigenous",
+    "file": "06-fall-forest-walk.html",
+    "thumb": "thumbs/06.jpg",
+    "curriculum_link": "Gr 1 Science: seasonal and daily changes; FPPL: learning supports the well-being of the land.",
+    "image_size": [
+      1002,
+      1253
+    ]
+  },
+  {
+    "id": "07",
+    "title": "Butterfly Life Cycle",
+    "category": "Science",
+    "file": "07-butterfly-life-cycle.html",
+    "thumb": "thumbs/07.jpg",
+    "curriculum_link": "Gr 2 Science: living things have life cycles adapted to their environment.",
+    "image_size": [
+      990,
+      1237
+    ]
+  },
+  {
+    "id": "08",
+    "title": "Sunflower Garden",
+    "category": "Science",
+    "file": "08-sunflower-garden.html",
+    "thumb": "thumbs/08.jpg",
+    "curriculum_link": "Gr 1 Science: plants have features that help them survive and grow.",
+    "image_size": [
+      1006,
+      1257
+    ]
+  },
+  {
+    "id": "09",
+    "title": "The Water Cycle",
+    "category": "Science",
+    "file": "09-the-water-cycle.html",
+    "thumb": "thumbs/09.jpg",
+    "curriculum_link": "Gr 2 Science: water is essential to all living things and cycles through the environment.",
+    "image_size": [
+      1203,
+      1239
+    ]
+  },
+  {
+    "id": "10",
+    "title": "Space Explorer",
+    "category": "Science",
+    "file": "10-space-explorer.html",
+    "thumb": "thumbs/10.jpg",
+    "curriculum_link": "Gr 1 Science: observable patterns and cycles in the sky (Sun, Moon, stars).",
+    "image_size": [
+      992,
+      1240
+    ]
+  },
+  {
+    "id": "11",
+    "title": "Magnet Fun",
+    "category": "Science",
+    "file": "11-magnet-fun.html",
+    "thumb": "thumbs/11.jpg",
+    "curriculum_link": "Gr 2 Science: forces as pushes and pulls (magnets).",
+    "image_size": [
+      1061,
+      1216
+    ]
+  },
+  {
+    "id": "12",
+    "title": "Tide Pool Explorers",
+    "category": "Science",
+    "file": "12-tide-pool-explorers.html",
+    "thumb": "thumbs/12.jpg",
+    "curriculum_link": "Gr 3 Science: biodiversity in the local environment.",
+    "image_size": [
+      1065,
+      1214
+    ]
+  },
+  {
+    "id": "13",
+    "title": "Dragon's Cave",
+    "category": "Fun",
+    "file": "13-dragon-s-cave.html",
+    "thumb": "thumbs/13.jpg",
+    "curriculum_link": "ELA Gr 1-3: creative writing and describing characters.",
+    "image_size": [
+      1203,
+      1199
+    ]
+  },
+  {
+    "id": "14",
+    "title": "Build a Robot",
+    "category": "Fun",
+    "file": "14-build-a-robot.html",
+    "thumb": "thumbs/14.jpg",
+    "curriculum_link": "Applied Design, Skills and Technologies Gr 1-3: design something for a purpose.",
+    "image_size": [
+      1207,
+      1216
+    ]
+  },
+  {
+    "id": "15",
+    "title": "Pirate Ship Adventure",
+    "category": "Fun",
+    "file": "15-pirate-ship-adventure.html",
+    "thumb": "thumbs/15.jpg",
+    "curriculum_link": "ELA Gr 1-3: creative writing, oral and written storytelling.",
+    "image_size": [
+      1203,
+      1126
+    ]
+  },
+  {
+    "id": "16",
+    "title": "Busy Bakery",
+    "category": "Fun",
+    "file": "16-busy-bakery.html",
+    "thumb": "thumbs/16.jpg",
+    "curriculum_link": "ELA Gr 1-3: descriptive writing using the senses.",
+    "image_size": [
+      1125,
+      1190
+    ]
+  },
+  {
+    "id": "17",
+    "title": "Farm Day",
+    "category": "Fun",
+    "file": "17-farm-day.html",
+    "thumb": "thumbs/17.jpg",
+    "curriculum_link": "Gr 1 Science: local plants and animals and what they need.",
+    "image_size": [
+      1218,
+      1353
+    ]
+  },
+  {
+    "id": "18",
+    "title": "Dinosaur Day",
+    "category": "Fun",
+    "file": "18-dinosaur-day.html",
+    "thumb": "thumbs/18.jpg",
+    "curriculum_link": "Gr 2 Science: life cycles (eggs and babies).",
+    "image_size": [
+      1203,
+      1170
+    ]
+  },
+  {
+    "id": "19",
+    "title": "My Dream Treehouse",
+    "category": "Fun",
+    "file": "19-my-dream-treehouse.html",
+    "thumb": "thumbs/19.jpg",
+    "curriculum_link": "Gr 1 Social Studies: families and homes; Applied Design: design for a purpose.",
+    "image_size": [
+      1203,
+      1214
+    ]
+  },
+  {
+    "id": "20",
+    "title": "Fire Truck Rescue",
+    "category": "Fun",
+    "file": "20-fire-truck-rescue.html",
+    "thumb": "thumbs/20.jpg",
+    "curriculum_link": "Gr 1-2 Social Studies: community helpers and how people help each other.",
+    "image_size": [
+      1203,
+      1186
+    ]
+  },
+  {
+    "id": "21",
+    "title": "Formline Raven",
+    "category": "Indigenous Art",
+    "file": "21-formline-raven.html",
+    "thumb": "thumbs/21.jpg",
+    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; Science: local animals.",
+    "image_size": [
+      1248,
+      1176
+    ]
+  },
+  {
+    "id": "22",
+    "title": "Formline Orca",
+    "category": "Indigenous Art",
+    "file": "22-formline-orca.html",
+    "thumb": "thumbs/22.jpg",
+    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; Science: local animals.",
+    "image_size": [
+      1154,
+      1033
+    ]
+  },
+  {
+    "id": "23",
+    "title": "Formline Eagle",
+    "category": "Indigenous Art",
+    "file": "23-formline-eagle.html",
+    "thumb": "thumbs/23.jpg",
+    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; Science: local animals.",
+    "image_size": [
+      1027,
+      1162
+    ]
+  },
+  {
+    "id": "24",
+    "title": "Formline Salmon",
+    "category": "Indigenous Art",
+    "file": "24-formline-salmon.html",
+    "thumb": "thumbs/24.jpg",
+    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; Science: local animals.",
+    "image_size": [
+      1216,
+      1364
+    ]
+  }
+]
