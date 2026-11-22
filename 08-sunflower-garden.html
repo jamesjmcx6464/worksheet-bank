@@ -13,7 +13,7 @@
     --accent: #2a6edb; --oops: #ef6a12; --oops-dark: #d45508; --bank: #6b3ec9; --bank-dark: #562cab;
     --good: #1f9d55; --shadow: 0 0.5rem 1.75rem rgba(30,50,80,0.16);
     --touch: 2.75rem; --font: "Avenir Next","Nunito","Segoe UI","Trebuchet MS","Verdana",sans-serif;
-    --dock-h: 0px; --chrome-h: 3.75rem; --ar: 0.75; --pic-w: 100%; --dock-w: 8.5rem;
+    --dock-h: 0px; --chrome-h: 3.75rem; --ar: 0.75; --pic-w: 100%;
   }
   * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
   html, body { margin: 0; padding: 0; min-height: 100%; color: var(--ink); font-family: var(--font); overscroll-behavior: contain; }
@@ -21,6 +21,7 @@
   body {
     background: radial-gradient(circle at 10% 0%, #eef5fc 0%, transparent 50%), radial-gradient(circle at 90% 100%, #e6eef8 0%, transparent 45%), var(--desk);
     padding: env(safe-area-inset-top) env(safe-area-inset-right) 0 env(safe-area-inset-left);
+    overflow-x: hidden;
   }
   button, input, textarea { font-family: inherit; }
 
@@ -48,29 +49,34 @@
   .btn-bank[aria-expanded="true"] { box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--bank); }
   .btn-icon { padding: 0; width: var(--touch); font-size: 1.1rem; }
 
-  .layout { display: flex; flex-direction: column; align-items: center; padding: 0.75rem 0.75rem calc(1rem + var(--dock-h)); }
-  .worksheet { width: 100%; max-width: 54rem; background: var(--paper); border-radius: 6px; box-shadow: var(--shadow); padding: 1rem 1rem 1.25rem; position: relative; }
-  .ws-grid { display: block; }
-  .pic-col, .write-col { min-width: 0; }
+  .layout { display: flex; flex-direction: column; align-items: stretch; padding: 0; }
+  .worksheet { width: 100%; max-width: none; background: var(--paper); border-radius: 0; box-shadow: var(--shadow); padding: 0; position: relative; }
 
-  .lined-field { display: flex; align-items: baseline; gap: 0.6rem; margin: 0 0 0.6rem; min-height: var(--touch); }
+  .pic-section { display: flex; flex-direction: column; align-items: center; width: 100%;
+    min-height: calc(100dvh - var(--chrome-h)); padding: 0.35rem 0.5rem 0.4rem; }
+  .write-section { display: flex; flex-direction: column; width: 100%; max-width: 46rem; margin: 0 auto;
+    min-height: calc(100dvh - var(--chrome-h)); padding: 1.35rem 1.1rem 2.5rem; background: #fffef8;
+    border-top: 3px solid #d5dee8; box-sizing: border-box; }
+
+  .lined-field { display: flex; align-items: baseline; gap: 0.6rem; margin: 0 0 0.85rem; min-height: var(--touch); }
   .lined-field span { font-weight: 800; font-size: 1.2rem; white-space: nowrap; flex-shrink: 0; }
   .lined-field input { flex: 1; min-width: 0; min-height: var(--touch); border: none; border-bottom: 2.5px solid var(--ink); border-radius: 0;
     background: transparent; font-size: 1.15rem; font-weight: 600; padding: 0.4rem 0.25rem 0.25rem; color: var(--ink); outline: none; }
   .lined-field input:focus { border-bottom-color: var(--accent); background: rgba(42,110,219,.06); }
 
-  .scene-block { margin-top: 0.5rem; }
+  .scene-block { margin-top: 0.35rem; flex: 1; display: flex; flex-direction: column; }
   .scene-title { display: block; text-align: center; margin: 0.4rem 0 0.1rem; font-size: 1.25rem; font-weight: 800; }
   .scene-hint { text-align: center; font-size: 0.85rem; font-style: italic; color: var(--muted); margin: 0 0 0.4rem; font-weight: 600; }
   .scene-write { width: 100%; border: none; resize: none; outline: none; font-size: 1.15rem; font-weight: 600; line-height: 2.75rem; padding: 0 0.4rem;
-    height: calc(2.75rem * var(--describe-lines, 4)); background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(2.75rem - 2px), var(--ink) calc(2.75rem - 2px), var(--ink) 2.75rem);
+    flex: 1; min-height: calc(2.75rem * var(--describe-lines, 8)); height: auto;
+    background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(2.75rem - 2px), var(--ink) calc(2.75rem - 2px), var(--ink) 2.75rem);
     background-color: transparent; color: var(--ink); overflow: auto; border-radius: 0; display: block; }
   .scene-write:focus { background-color: rgba(42,110,219,.05); }
   .print-only { display: none; }
-  .ws-note { margin: 0.6rem 0 0; font-size: 0.78rem; line-height: 1.35; color: var(--muted); font-weight: 600; font-style: italic; text-align: center; }
+  .ws-note { margin: 0.8rem 0 0; font-size: 0.78rem; line-height: 1.35; color: var(--muted); font-weight: 600; font-style: italic; text-align: center; }
 
-  .stage { position: relative; width: 100%; margin: 0.25rem auto 0.75rem; user-select: none; -webkit-user-select: none; touch-action: pan-y;
-    border: 2.5px solid var(--ink); background: #fff; overflow: hidden; aspect-ratio: var(--ar); }
+  .stage { position: relative; width: var(--pic-w); max-width: 100%; margin: 0.2rem auto 0.4rem; user-select: none; -webkit-user-select: none; touch-action: pan-y;
+    border: 2.5px solid var(--ink); background: #fff; overflow: hidden; aspect-ratio: var(--ar); flex: 0 0 auto; }
   .stage.framed { border-color: transparent; }
   .stage canvas.pic { display: block; width: 100%; height: 100%; touch-action: pan-y; cursor: pointer; image-rendering: auto; }
   .stage.loading::after { content: "Getting the picture ready…"; position: absolute; inset: 0; display: grid; place-items: center; font-weight: 800; color: var(--muted); }
@@ -110,21 +116,24 @@
   .stage.connect-mode .connect-banner { display: flex; }
   .connect-banner button { background: #fff; color: var(--ink); border: none; border-radius: 999px; min-height: 2rem; padding: 0 0.75rem; font-weight: 800; cursor: pointer; font-size: 0.9rem; }
 
-  .dock { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: rgba(255,255,255,.97); backdrop-filter: blur(12px); border-top: 1px solid rgba(30,50,80,.1);
-    box-shadow: 0 -6px 20px rgba(30,50,80,.08); padding: 0.5rem 0.6rem calc(0.5rem + env(safe-area-inset-bottom, 0px)); display: flex; flex-direction: column; gap: 0.5rem; }
-  .dock-tools { display: flex; gap: 0.5rem; justify-content: center; }
+  .dock { position: relative; z-index: 30; width: 100%; max-width: 70rem; flex-shrink: 0; margin-top: auto;
+    background: rgba(255,255,255,.97); border: 1px solid rgba(30,50,80,.1); border-radius: 1.15rem;
+    box-shadow: 0 2px 10px rgba(30,50,80,.08); padding: 0.4rem 0.55rem 0.45rem; display: flex; flex-direction: column; gap: 0.35rem; }
+  .dock-row { display: flex; flex-direction: column; gap: 0.4rem; }
+  .dock-tools { display: flex; gap: 0.45rem; justify-content: center; }
   .dock-tools .btn { flex: 1 1 0; max-width: 12.5rem; padding: 0 0.5rem; }
-  .palette-wrap { display: flex; flex-direction: column; gap: 0.4rem; }
-  .palette-hint { text-align: center; font-size: 0.8rem; font-weight: 700; color: var(--muted); }
-  .palette { display: grid; grid-template-columns: repeat(8, minmax(2rem, 2.75rem)); justify-content: center; gap: 0.4rem; padding: 2px 2px 4px; }
-  .swatch { width: 100%; aspect-ratio: 1; min-height: 2.1rem; border-radius: 0.75rem; border: 2.5px solid rgba(0,0,0,.35); cursor: pointer; touch-action: manipulation;
+  .palette-wrap { display: flex; flex-direction: column; gap: 0.25rem; }
+  .palette-hint { text-align: center; font-size: 0.78rem; font-weight: 700; color: var(--muted); }
+  .palette { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.32rem; padding: 2px; }
+  .swatch { width: 2.35rem; height: 2.35rem; flex: 0 0 auto; border-radius: 0.7rem; border: 2.5px solid rgba(0,0,0,.35); cursor: pointer; touch-action: manipulation;
     padding: 0; position: relative; box-shadow: inset 0 -4px 0 rgba(0,0,0,.12); transition: transform .1s ease; }
   .swatch:active { transform: scale(.94); }
   .swatch.selected { transform: scale(1.1); border-color: #111; box-shadow: 0 0 0 3px #fff, 0 0 0 6px #111, inset 0 -4px 0 rgba(0,0,0,.12); z-index: 1; }
   .swatch.white { background: #fff; border-color: #888; }
   .swatch.white .eraser { position: absolute; inset: 0; display: grid; place-items: center; font-size: 1.1rem; font-weight: 900; color: #666; pointer-events: none; }
 
-  .word-bank { display: none; background: #f6f1ff; border: 2px solid var(--bank); border-radius: 1rem; padding: 0.6rem; }
+  .word-bank { display: none; background: #f6f1ff; border: 2px solid var(--bank); border-radius: 1rem; padding: 0.6rem;
+    position: absolute; left: 0.4rem; right: 0.4rem; bottom: calc(100% + 0.35rem); box-shadow: var(--shadow); z-index: 25; }
   .word-bank.open { display: block; }
   .word-bank h2 { margin: 0 0 0.5rem; font-size: 0.85rem; text-align: center; color: var(--bank-dark); letter-spacing: .04em; text-transform: uppercase; }
   .word-bank p { margin: 0 0 0.5rem; font-size: 0.75rem; text-align: center; color: var(--bank-dark); font-weight: 600; }
@@ -132,7 +141,9 @@
   .word-chip { min-height: var(--touch); padding: 0 0.9rem; border-radius: 999px; border: 2px solid #d3c4f3; background: #fff; font-size: 1rem; font-weight: 800; color: #3b2670; cursor: pointer; touch-action: manipulation; }
   .word-chip:active { transform: scale(.96); background: #efe8ff; }
 
-  .toast { position: fixed; left: 50%; bottom: calc(var(--dock-h) + 0.75rem); transform: translateX(-50%) translateY(12px); background: var(--ink); color: #fff; font-weight: 800;
+  .scroll-cue { margin: 0.15rem 0 0; font-size: 0.8rem; font-weight: 800; color: var(--muted); text-align: center; letter-spacing: .01em; }
+
+  .toast { position: fixed; left: 50%; bottom: 1.25rem; transform: translateX(-50%) translateY(12px); background: var(--ink); color: #fff; font-weight: 800;
     font-size: 0.95rem; padding: 0.6rem 1rem; border-radius: 999px; z-index: 50; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; white-space: nowrap; box-shadow: var(--shadow); }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
@@ -147,41 +158,30 @@
   .loader { max-width: 34rem; margin: 2rem auto; background: #fff; border-radius: 1rem; padding: 1.5rem; box-shadow: var(--shadow); }
   .loader h2 { margin-top: 0; } .loader label { display: block; font-weight: 700; margin: 0.8rem 0 0.3rem; }
 
-  /* ---------- side dock (tablets, boards) ---------- */
-  body.mode-side .layout, body.mode-wide .layout { flex-direction: row; align-items: flex-start; justify-content: center; gap: 0.9rem; padding: 0.9rem 1rem 1.25rem; }
-  body.mode-side .dock, body.mode-wide .dock { position: sticky; top: calc(var(--chrome-h) + 0.9rem); left: auto; right: auto; bottom: auto; width: var(--dock-w); flex-shrink: 0;
-    border: 1px solid rgba(30,50,80,.1); border-radius: 1.25rem; box-shadow: var(--shadow); padding: 0.75rem 0.6rem; order: -1; overflow: visible; }
-  body.mode-side .dock-tools, body.mode-wide .dock-tools { flex-direction: column; }
-  body.mode-side .dock-tools .btn, body.mode-wide .dock-tools .btn { width: 100%; max-width: none; font-size: 0.9rem; }
-  body.mode-side .palette, body.mode-wide .palette { grid-template-columns: 1fr 1fr; justify-items: center; gap: 0.5rem; }
-  body.mode-side .swatch, body.mode-wide .swatch { width: 2.6rem; height: 2.6rem; }
   body.mode-phone .label input { font-size: 0.9rem; }
-  body.mode-side .palette-hint, body.mode-wide .palette-hint { font-size: 0.75rem; line-height: 1.3; }
-  body.mode-side .word-bank, body.mode-wide .word-bank { position: absolute; left: calc(100% + 0.6rem); top: 0; width: 14rem; box-shadow: var(--shadow); z-index: 25; }
-  body.mode-side .toast, body.mode-wide .toast { bottom: 1.5rem; }
-  body.mode-side .worksheet { max-width: none; flex: 1; }
-  /* wide/landscape: picture column sized from viewport height, writing column takes the rest */
-  body.mode-wide .worksheet { max-width: none; flex: 1; padding: 0.9rem 1.1rem; }
-  body.mode-wide .ws-grid { display: flex; gap: 1.4rem; align-items: flex-start; }
-  body.mode-wide .pic-col { width: var(--pic-w); flex-shrink: 0; }
-  body.mode-wide .pic-col .stage { margin: 0; }
-  body.mode-wide .write-col { flex: 1; display: flex; flex-direction: column; padding-top: 0.25rem; }
-  body.mode-wide .write-col .lined-field { flex-wrap: wrap; }
-  body.mode-wide .write-col .lined-field input { flex-basis: 10rem; }
-  body.mode-wide .scene-block { margin-top: 1rem; }
+
+  /* Wider screens: tools and palette share one row so the picture can be taller */
+  @media (min-width: 1100px) {
+    .dock-row { flex-direction: row; align-items: center; gap: 0.75rem; }
+    .dock-tools { flex-wrap: nowrap; flex: 0 0 auto; }
+    .dock-tools .btn { flex: 0 0 auto; width: auto; min-width: 6.4rem; max-width: none; }
+    .palette-wrap { flex: 1; min-width: 0; }
+    .palette-hint { font-size: 0.75rem; }
+  }
 
   @media print {
     html { font-size: 12px !important; }
     html, body { background: #fff !important; }
-    .chrome, .dock, .toast, .modal-back, .connect-banner, .connect-hit, .label-del, .label-tab::after { display: none !important; }
+    .chrome, .dock, .toast, .modal-back, .connect-banner, .connect-hit, .label-del, .label-tab::after, .scroll-cue { display: none !important; }
     .label-tab { width: 0.6rem; height: 0.6rem; background: var(--ink) !important; border: none; box-shadow: none !important; }
     .layout { padding: 0 !important; display: block !important; }
     .worksheet { width: 100% !important; max-width: none !important; box-shadow: none; border-radius: 0; padding: 0 !important; }
-    .ws-grid { display: block !important; }
-    .pic-col { width: auto !important; }
-    .stage { width: calc(7.1in * var(--ar)) !important; max-width: 100%; margin: 0.1in auto 0.15in !important; overflow: visible; break-inside: avoid; }
+    .pic-section { min-height: 0 !important; padding: 0 !important; display: block !important; }
+    .stage { width: min(100%, calc(6.1in * var(--ar))) !important; max-height: 6.1in !important; height: auto !important;
+      margin: 0.08in auto 0.16in !important; overflow: visible; break-inside: avoid; }
     .label.selected .label-box { box-shadow: none; }
     .speech textarea::placeholder, .label input::placeholder { color: transparent !important; }
+    .write-section { min-height: 0 !important; max-width: none !important; padding: 0 !important; border: none !important; background: #fff !important; }
     .scene-write { display: none !important; }
     .print-only { display: block; }
     .print-lines { white-space: pre-wrap; font-size: 1.15rem; font-weight: 600; line-height: 0.36in; padding: 0 0.4rem; min-height: calc(0.36in * 4);
@@ -190,7 +190,7 @@
     .ws-note { font-size: 0.85rem; margin-top: 0.06in; color: #444; }
     .lined-field { min-height: 0; margin-bottom: 0.08in; } .lined-field input { min-height: 0; padding: 0.05in 0.25rem 0.02in; }
     * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    @page { size: letter portrait; margin: 0.4in; }
+    @page { size: letter portrait; margin: 0.45in; }
   }
 </style>
 </head>
@@ -208,55 +208,55 @@
 
   <div class="layout" id="layout">
     <article class="worksheet" id="worksheet">
-      <div class="ws-grid">
-        <div class="pic-col">
-          <label class="lined-field" id="topField">
-            <span id="topLbl">Name:</span>
-            <input type="text" id="topText" maxlength="48" autocomplete="off" spellcheck="true">
-          </label>
-          <div class="stage loading" id="stage">
-            <canvas class="pic" id="pic" role="img" aria-label="Colouring picture. Pick a colour, then tap a part of the picture."></canvas>
-            <svg class="pointer-lines" id="pointerLines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
-            <div class="speech" id="speech">
-              <textarea id="speechText" maxlength="120" autocomplete="off" spellcheck="true" placeholder="Hello!" aria-label="Speech bubble"></textarea>
+      <section class="pic-section" id="picSection">
+        <div class="stage loading" id="stage">
+          <canvas class="pic" id="pic" role="img" aria-label="Colouring picture. Pick a colour, then tap a part of the picture."></canvas>
+          <svg class="pointer-lines" id="pointerLines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <div class="speech" id="speech">
+            <textarea id="speechText" maxlength="120" autocomplete="off" spellcheck="true" placeholder="Hello!" aria-label="Speech bubble"></textarea>
+          </div>
+          <div class="labels-layer" id="labelsLayer"></div>
+          <div class="connect-hit" id="connectHit"></div>
+          <div class="connect-banner" id="connectBanner"><span>Tap where you want to point!</span><button type="button" id="cancelConnect">Cancel</button></div>
+        </div>
+        <aside class="dock" id="dock">
+          <div class="dock-row">
+            <div class="dock-tools">
+              <button type="button" class="btn btn-oops" id="oopsBtn" disabled>Oops!</button>
+              <button type="button" class="btn btn-label" id="addLabelBtn">+ Label</button>
+              <button type="button" class="btn btn-bank" id="bankBtn" aria-expanded="false">Word Bank</button>
             </div>
-            <div class="labels-layer" id="labelsLayer"></div>
-            <div class="connect-hit" id="connectHit"></div>
-            <div class="connect-banner" id="connectBanner"><span>Tap where you want to point!</span><button type="button" id="cancelConnect">Cancel</button></div>
+            <div class="palette-wrap">
+              <div class="palette-hint" id="paletteHint">Pick a colour, then tap the picture.</div>
+              <div class="palette" id="palette" role="listbox" aria-label="Colour palette"></div>
+            </div>
           </div>
-        </div>
-        <div class="write-col" id="writeCol">
-          <label class="lined-field" id="bottomField">
-            <span id="bottomLbl">About it:</span>
-            <input type="text" id="bottomText" maxlength="80" autocomplete="off" spellcheck="true">
-          </label>
-          <div class="scene-block">
-            <label class="scene-title" for="sceneText">Describe the scene</label>
-            <p class="scene-hint" id="sceneHint"></p>
-            <textarea id="sceneText" class="scene-write" maxlength="800" autocomplete="off" spellcheck="true" aria-label="Describe the scene"></textarea>
-            <div class="print-only print-lines" id="scenePrint"></div>
+          <div class="word-bank" id="wordBank" hidden>
+            <h2>Word Bank</h2>
+            <p>Tap a label, then tap a word.</p>
+            <div class="word-grid" id="wordGrid"></div>
           </div>
-          <p class="ws-note" id="wsNote" hidden></p>
+        </aside>
+        <p class="scroll-cue">Scroll down to write ▼</p>
+      </section>
+      <section class="write-section" id="writeCol">
+        <label class="lined-field" id="topField">
+          <span id="topLbl">Name:</span>
+          <input type="text" id="topText" maxlength="48" autocomplete="off" spellcheck="true">
+        </label>
+        <label class="lined-field" id="bottomField">
+          <span id="bottomLbl">About it:</span>
+          <input type="text" id="bottomText" maxlength="80" autocomplete="off" spellcheck="true">
+        </label>
+        <div class="scene-block">
+          <label class="scene-title" for="sceneText">Describe the scene</label>
+          <p class="scene-hint" id="sceneHint"></p>
+          <textarea id="sceneText" class="scene-write" maxlength="800" autocomplete="off" spellcheck="true" aria-label="Describe the scene"></textarea>
+          <div class="print-only print-lines" id="scenePrint"></div>
         </div>
-      </div>
+        <p class="ws-note" id="wsNote" hidden></p>
+      </section>
     </article>
-
-    <aside class="dock" id="dock">
-      <div class="dock-tools">
-        <button type="button" class="btn btn-oops" id="oopsBtn" disabled>Oops!</button>
-        <button type="button" class="btn btn-label" id="addLabelBtn">+ Label</button>
-        <button type="button" class="btn btn-bank" id="bankBtn" aria-expanded="false">Word Bank</button>
-      </div>
-      <div class="word-bank" id="wordBank" hidden>
-        <h2>Word Bank</h2>
-        <p>Tap a label, then tap a word.</p>
-        <div class="word-grid" id="wordGrid"></div>
-      </div>
-      <div class="palette-wrap">
-        <div class="palette-hint" id="paletteHint">Pick a colour, then tap the picture.</div>
-        <div class="palette" id="palette" role="listbox" aria-label="Colour palette"></div>
-      </div>
-    </aside>
   </div>
 
   <div class="toast" id="toast" role="status"></div>
@@ -296,7 +296,7 @@
     topLbl: $("topLbl"), topText: $("topText"), bottomLbl: $("bottomLbl"), bottomText: $("bottomText"), sceneText: $("sceneText"),
     sceneHint: $("sceneHint"), scenePrint: $("scenePrint"), speech: $("speech"), speechText: $("speechText"), printBtn: $("printBtn"),
     resetBtn: $("resetBtn"), resetModal: $("resetModal"), resetCancel: $("resetCancel"), resetConfirm: $("resetConfirm"),
-    toast: $("toast"), dock: $("dock"), chrome: $("chrome"), layout: $("layout"), worksheet: $("worksheet")
+    toast: $("toast"), dock: $("dock"), chrome: $("chrome"), layout: $("layout"), worksheet: $("worksheet"), picSection: $("picSection"), writeCol: $("writeCol")
   };
 
   var state = { color: null, undo: [], labels: [], selectedLabelId: null, connectId: null, nextLabel: 1, bankOpen: false, fills: {} };
@@ -450,40 +450,45 @@
   var AR = 0.75;
   function layout() {
     var w = window.innerWidth, h = window.innerHeight;
-    var mode = w < 900 ? "phone" : (w / h >= 1.15 ? "wide" : "side");
+    var phone = w < 700;
+    var landscape = w / Math.max(h, 1) >= 1.15;
     // scale everything (rem) up on big screens so kids at a Smart Board get big targets
     var s = 1;
-    if (w >= 1200 && h >= 700) s = clamp(Math.min(w / 1280, h / 800), 1, 2.4);
-    else if (mode === "side" && w >= 1000) s = clamp(w / 1024, 1, 1.25);
+    if (w >= 1400 && h >= 800) s = clamp(Math.min(w / 1280, h / 800), 1, 2.2);
+    else if (w >= 1100 && h >= 700) s = clamp(Math.min(w / 1180, h / 800), 1, 1.5);
     document.documentElement.style.fontSize = (16 * s).toFixed(2) + "px";
-    document.body.classList.toggle("mode-phone", mode === "phone");
-    document.body.classList.toggle("mode-side", mode === "side");
-    document.body.classList.toggle("mode-wide", mode === "wide");
+    document.body.classList.toggle("mode-phone", phone);
+    document.body.classList.toggle("mode-landscape", landscape);
+    document.body.classList.toggle("mode-portrait", !landscape);
+    document.body.classList.toggle("mode-board", w >= 1400 && h >= 800);
+    document.body.classList.remove("mode-side", "mode-wide");
     var rem = 16 * s;
     var chromeH = els.chrome.getBoundingClientRect().height;
     document.documentElement.style.setProperty("--chrome-h", chromeH + "px");
-    if (mode === "wide") {
-      // picture fills viewport height (minus header, top line, paddings) at its own aspect ratio
-      var topH = $("topField").getBoundingClientRect().height + 0.6 * rem;
-      var availH = h - chromeH - 2 * 0.9 * rem - 2 * 0.9 * rem - topH - 6;
-      var dockW = els.dock.getBoundingClientRect().width || 8.5 * rem;
-      var availW = w - dockW - 0.9 * rem - 2 * 1 * rem - 2 * 1.1 * rem - 1.4 * rem - 18 * rem; // leave >= 18rem to write
-      var picW = Math.max(260, Math.min(availH * AR, availW));
-      document.documentElement.style.setProperty("--pic-w", Math.floor(picW) + "px");
-      var lines = Math.max(4, Math.min(10, Math.floor((availH + topH - 9 * rem) / (2.75 * rem))));
-      document.documentElement.style.setProperty("--describe-lines", lines);
-    } else {
-      document.documentElement.style.setProperty("--describe-lines", 4);
-    }
-    var sw = els.stage.getBoundingClientRect().width;
-    if (sw) document.documentElement.style.setProperty("--label-w", Math.round(clamp(0.24 * sw, 5.5 * rem, 9 * rem)) + "px");
+    var dockH = els.dock ? els.dock.getBoundingClientRect().height : 0;
+    var cueH = 0;
+    var cue = document.querySelector(".scroll-cue");
+    if (cue) cueH = cue.getBoundingClientRect().height + 0.15 * rem;
+    var section = els.picSection || document.querySelector(".pic-section");
+    var cs = section ? getComputedStyle(section) : null;
+    var padY = cs ? (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0) : 0.75 * rem;
+    var stageMargin = 0.6 * rem; // .stage margin 0.2rem top + 0.4rem bottom
+    var availH = Math.max(160, h - chromeH - dockH - cueH - padY - stageMargin - 12);
+    var availW = section ? section.clientWidth : (w - rem);
+    var picW = (availW / AR) > availH ? availH * AR : availW;
+    picW = Math.max(160, Math.floor(picW));
+    document.documentElement.style.setProperty("--pic-w", picW + "px");
+    var writeAvail = Math.max(6 * 2.75 * rem, h - chromeH - 4.5 * rem - 2 * (2.75 * rem + 0.85 * rem) - 3.2 * rem);
+    var lines = Math.max(6, Math.min(14, Math.floor(writeAvail / (2.75 * rem))));
+    document.documentElement.style.setProperty("--describe-lines", String(lines));
+    document.documentElement.style.setProperty("--label-w", Math.round(clamp(0.24 * picW, 5.5 * rem, 9 * rem)) + "px");
     updateDockHeight();
     renderLines();
     fitSpeech();
   }
   function updateDockHeight() {
-    var h = document.body.classList.contains("mode-phone") ? els.dock.getBoundingClientRect().height : 0;
-    document.documentElement.style.setProperty("--dock-h", Math.ceil(h) + "px");
+    if (!els.dock) return;
+    document.documentElement.style.setProperty("--dock-h", Math.ceil(els.dock.getBoundingClientRect().height) + "px");
   }
 
   // ---------------- persistence ----------------
@@ -804,7 +809,7 @@
   els.speechText.addEventListener("input", function () { fitSpeech(); scheduleSave(); });
   document.addEventListener("focusin", function (e) {
     var t = e.target;
-    if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA") && document.body.classList.contains("mode-phone"))
+    if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA") && t.closest && t.closest(".write-section"))
       setTimeout(function () { try { t.scrollIntoView({ block: "center", behavior: "smooth" }); } catch (err) { t.scrollIntoView(); } }, 300);
   });
   var rT = null;
@@ -814,7 +819,7 @@
     if (e.target.closest(".label") || e.target.closest(".dock") || e.target.closest(".chrome") || e.target.closest(".modal")) return;
     if (state.selectedLabelId && !state.connectId) { state.selectedLabelId = null; renderLabels(); }
   });
-  if (window.ResizeObserver) new ResizeObserver(function () { updateDockHeight(); }).observe(els.dock);
+  if (window.ResizeObserver && els.dock) new ResizeObserver(function () { clearTimeout(rT); rT = setTimeout(layout, 60); }).observe(els.dock);
 
   if (CONFIG && CONFIG.image) start(CONFIG); else showLoader();
 })();
