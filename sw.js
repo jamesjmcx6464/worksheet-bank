@@ -7,7 +7,7 @@
  * and the extensionless URL. index.html is not precached (its 308 to / would
  * fail install).
  */
-const CACHE = "ws-bank-r2-1.2";
+const CACHE = "ws-bank-r2-1.3";
 const PRECACHE = [
   "01-welcome-the-salmon.html",
   "02-thank-you-cedar-tree.html",
@@ -64,7 +64,8 @@ const PRECACHE = [
   "favicon.ico",
   "favicon-32.png",
   "manifest.webmanifest",
-  "pwa.js"
+  "pwa.js",
+  "profiles.js"
 ];
 
 async function asCachedResponse(res) {
