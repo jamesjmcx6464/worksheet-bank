@@ -1,0 +1,36 @@
+{
+  "name": "Worksheet Bank",
+  "short_name": "Worksheets",
+  "description": "Colour, label and write worksheets for ages 6 to 8. Pick a colour, fill the picture, then scroll down to write.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#2a6edb",
+  "theme_color": "#2a6edb",
+  "lang": "en-CA",
+  "categories": [
+    "education",
+    "kids"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
