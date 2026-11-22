@@ -1,5 +1,13 @@
-/* Worksheet Bank service worker. Cache name includes the build version. */
-const CACHE = "ws-bank-20261122T131550";
+/* Worksheet Bank service worker. Cache name includes the site version.
+ *
+ * Cloudflare Pages 308-redirects *.html to the extensionless URL. A cached
+ * Response with redirected=true cannot be used for a navigation in Chrome
+ * ("This site can't be reached"). We never cache or return a redirected
+ * Response: we rebuild a clean 200 and store it under both the .html URL
+ * and the extensionless URL. index.html is not precached (its 308 to / would
+ * fail install).
+ */
+const CACHE = "ws-bank-r2-1.1";
 const PRECACHE = [
   "01-welcome-the-salmon.html",
   "02-thank-you-cedar-tree.html",
@@ -59,11 +67,91 @@ const PRECACHE = [
   "pwa.js"
 ];
 
+async function asCachedResponse(res) {
+  if (!res.redirected) return res;
+  return new Response(await res.blob(), { status: 200, statusText: 'OK', headers: res.headers });
+}
+
+function bareHref(href) {
+  const u = new URL(href, self.registration.scope);
+  if (u.pathname.endsWith('.html')) {
+    return new URL(u.pathname.replace(/\.html$/, ''), u.origin).href;
+  }
+  return u.href;
+}
+
+function htmlHref(href) {
+  const u = new URL(href, self.registration.scope);
+  if (!u.pathname.endsWith('.html') && !u.pathname.endsWith('/')) {
+    return new URL(u.pathname + '.html', u.origin).href;
+  }
+  return u.href;
+}
+
+function isWorksheetPath(url) {
+  const name = url.pathname.split('/').pop();
+  return /^\d{2}-/.test(name);
+}
+
+function isVersionJson(url) {
+  return url.pathname.endsWith('/version.json') || url.pathname.endsWith('version.json');
+}
+
+function isIndexPath(url) {
+  const p = url.pathname;
+  return p === '/' || p === '' || /\/index\.html$/.test(p);
+}
+
+async function putPage(cache, requestUrl, res) {
+  const url = new URL(requestUrl, self.registration.scope);
+  await cache.put(url.href, res.clone());
+  if (url.pathname.endsWith('.html') && !/\/index\.html$/.test(url.pathname)) {
+    await cache.put(bareHref(url.href), res.clone());
+  } else if (isWorksheetPath(url) && !url.pathname.endsWith('.html')) {
+    await cache.put(htmlHref(url.href), res.clone());
+  }
+  if (isIndexPath(url)) {
+    await cache.put(new URL('./', self.registration.scope).href, res.clone());
+  }
+}
+
+async function matchPage(cache, request) {
+  const url = new URL(request.url);
+  const candidates = [request, url.href];
+  if (url.pathname.endsWith('.html')) candidates.push(bareHref(url.href));
+  else if (isWorksheetPath(url)) candidates.push(htmlHref(url.href));
+  if (isIndexPath(url)) candidates.push(new URL('./', self.registration.scope).href);
+  const seen = {};
+  for (const c of candidates) {
+    const key = typeof c === 'string' ? c : (c.url || String(c));
+    if (seen[key]) continue;
+    seen[key] = true;
+    const hit = await cache.match(c, { ignoreSearch: true });
+    if (hit) return hit;
+  }
+  return null;
+}
+
+function offlineResponse() {
+  return new Response('You appear to be offline.', { status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+}
+
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE);
     const base = self.registration.scope;
-    await cache.addAll(PRECACHE.map((p) => new URL(p, base).href));
+    for (const p of PRECACHE) {
+      const href = new URL(p, base).href;
+      const res = await fetch(href);
+      if (!res || !res.ok) throw new Error('precache failed: ' + href);
+      const stored = await asCachedResponse(res);
+      if (p.endsWith('.html') && p !== 'index.html') {
+        await cache.put(href, stored.clone());
+        await cache.put(new URL(p.replace(/\.html$/, ''), base).href, stored);
+      } else {
+        await cache.put(href, stored);
+      }
+    }
   })());
 });
 
@@ -79,43 +167,28 @@ self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') self.skipWaiting();
 });
 
-function isVersionJson(url) {
-  return url.pathname.endsWith('/version.json') || url.pathname.endsWith('version.json');
-}
-
-function isIndexPath(url) {
-  const p = url.pathname;
-  return p === '/' || p === '' || /\/index\.html$/.test(p);
-}
-
-async function networkFirstIndex(request) {
+async function networkFirstNav(request) {
   const cache = await caches.open(CACHE);
   try {
     const res = await fetch(request);
-    if (res && res.ok) {
-      // Store under '/' so a later offline visit to the start_url works,
-      // even if this request was for /index.html (which Cloudflare 308s).
-      cache.put(new URL('./', self.registration.scope), res.clone());
-    }
-    return res;
+    const stored = await asCachedResponse(res);
+    if (stored && stored.ok) await putPage(cache, request.url, stored);
+    return stored;
   } catch (err) {
-    return (await cache.match(new URL('./', self.registration.scope)))
-      || (await cache.match(request))
-      || new Response('You appear to be offline.', { status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+    return (await matchPage(cache, request)) || (await cache.match(new URL('./', self.registration.scope))) || offlineResponse();
   }
 }
 
 async function cacheFirst(request) {
   const cache = await caches.open(CACHE);
-  const hit = await cache.match(request, { ignoreSearch: true });
+  const hit = await cache.match(request, { ignoreSearch: true }) || await matchPage(cache, request);
   if (hit) return hit;
   try {
     const res = await fetch(request);
-    return res;
+    return await asCachedResponse(res);
   } catch (err) {
     if (request.mode === 'navigate') {
-      return (await cache.match(new URL('./', self.registration.scope)))
-        || new Response('You appear to be offline.', { status: 503, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+      return (await matchPage(cache, request)) || (await cache.match(new URL('./', self.registration.scope))) || offlineResponse();
     }
     throw err;
   }
@@ -129,8 +202,8 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(fetch(event.request, { cache: 'no-store' }));
     return;
   }
-  if (isIndexPath(url)) {
-    event.respondWith(networkFirstIndex(event.request));
+  if (event.request.mode === 'navigate' || isIndexPath(url) || isWorksheetPath(url)) {
+    event.respondWith(networkFirstNav(event.request));
     return;
   }
   event.respondWith(cacheFirst(event.request));

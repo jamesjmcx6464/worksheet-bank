@@ -1,7 +1,7 @@
 /* Worksheet Bank: register the service worker, offer install, prompt for updates. */
 (function () {
   "use strict";
-  var VERSION = "20261122T131550";
+  var VERSION = "1.1";
   var UPDATE_WAIT_MS = 8000;
   var CHECK_MS = 2 * 60 * 1000;
 
@@ -52,7 +52,7 @@
     var res = await fetch(versionUrl(), { cache: "no-store", signal: signal });
     if (!res.ok) return null;
     var data = await res.json();
-    return (data && (data.id || data.built)) || null;
+    return (data && (data.version || data.id || data.built)) || null;
   }
 
   function showBanner() {
@@ -71,7 +71,7 @@
       document.body.appendChild(el);
     }
     var ver = el.querySelector(".ver");
-    if (ver) ver.textContent = remoteId && remoteId !== VERSION ? (VERSION + " → " + remoteId) : "";
+    if (ver) ver.textContent = remoteId && remoteId !== VERSION ? ("Version " + VERSION + " → Version " + remoteId) : "";
     el.querySelector(".go").disabled = updating;
     el.querySelector(".go").textContent = updating ? "Updating…" : "Update";
   }

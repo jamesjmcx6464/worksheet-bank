@@ -54,6 +54,8 @@
   .btn-bank { background: var(--bank); color: #fff; }
   .btn-bank[aria-expanded="true"] { box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--bank); }
   .btn-icon { padding: 0; width: var(--touch); font-size: 1.1rem; }
+  .site-version { font-size: 0.75rem; font-weight: 700; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+
 
   .layout { display: flex; flex-direction: column; align-items: stretch; padding: 0; }
   .worksheet { width: 100%; max-width: none; background: var(--paper); border-radius: 0; box-shadow: var(--shadow); padding: 0; position: relative; }
@@ -178,7 +180,7 @@
   @media print {
     html { font-size: 12px !important; }
     html, body { background: #fff !important; }
-    .chrome, .dock, .toast, .modal-back, .connect-banner, .connect-hit, .label-del, .label-tab::after, .scroll-cue { display: none !important; }
+    .chrome, .dock, .toast, .modal-back, .connect-banner, .connect-hit, .label-del, .label-tab::after, .scroll-cue, .site-version { display: none !important; }
     .label-tab { width: 0.6rem; height: 0.6rem; background: var(--ink) !important; border: none; box-shadow: none !important; }
     .layout { padding: 0 !important; display: block !important; }
     .worksheet { width: 100% !important; max-width: none !important; box-shadow: none; border-radius: 0; padding: 0 !important; }
@@ -205,6 +207,7 @@
     <div class="chrome-left">
       <a class="btn btn-home" id="homeBtn" href="index.html" title="Back to all worksheets" aria-label="Home: all worksheets"><span aria-hidden="true">⌂</span><span class="home-txt">Home</span></a>
       <h1 id="title">Worksheet</h1>
+      <span class="site-version" id="siteVersion">Version 1.1</span>
     </div>
     <div class="chrome-actions">
       <button type="button" class="btn btn-ghost" id="resetBtn" title="Start over">Reset</button>
