@@ -240,54 +240,6 @@
     ]
   },
   {
-    "id": "21",
-    "title": "Formline Raven",
-    "category": "Indigenous Art",
-    "file": "21-formline-raven.html",
-    "thumb": "thumbs/21.jpg",
-    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; Science: local animals.",
-    "image_size": [
-      1248,
-      1176
-    ]
-  },
-  {
-    "id": "22",
-    "title": "Formline Orca",
-    "category": "Indigenous Art",
-    "file": "22-formline-orca.html",
-    "thumb": "thumbs/22.jpg",
-    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; Science: local animals.",
-    "image_size": [
-      1154,
-      1033
-    ]
-  },
-  {
-    "id": "23",
-    "title": "Formline Eagle",
-    "category": "Indigenous Art",
-    "file": "23-formline-eagle.html",
-    "thumb": "thumbs/23.jpg",
-    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; Science: local animals.",
-    "image_size": [
-      1027,
-      1162
-    ]
-  },
-  {
-    "id": "24",
-    "title": "Formline Salmon",
-    "category": "Indigenous Art",
-    "file": "24-formline-salmon.html",
-    "thumb": "thumbs/24.jpg",
-    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; Science: local animals.",
-    "image_size": [
-      1216,
-      1364
-    ]
-  },
-  {
     "id": "25",
     "title": "Rainy West Coast Day",
     "category": "BC Seasons & Weather",
@@ -357,6 +309,78 @@
     "image_size": [
       973,
       1216
+    ]
+  },
+  {
+    "id": "31",
+    "title": "Formline Killer Whale",
+    "category": "Indigenous Art",
+    "file": "31-formline-killer-whale.html",
+    "thumb": "thumbs/31.jpg",
+    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; exploring elements of design (shape, line, colour).",
+    "image_size": [
+      1138,
+      1121
+    ]
+  },
+  {
+    "id": "32",
+    "title": "Formline Raven",
+    "category": "Indigenous Art",
+    "file": "32-formline-raven.html",
+    "thumb": "thumbs/32.jpg",
+    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; exploring elements of design (shape, line, colour).",
+    "image_size": [
+      1134,
+      1108
+    ]
+  },
+  {
+    "id": "33",
+    "title": "Formline Eagle",
+    "category": "Indigenous Art",
+    "file": "33-formline-eagle.html",
+    "thumb": "thumbs/33.jpg",
+    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; exploring elements of design (shape, line, colour).",
+    "image_size": [
+      1103,
+      1183
+    ]
+  },
+  {
+    "id": "34",
+    "title": "Formline Bear",
+    "category": "Indigenous Art",
+    "file": "34-formline-bear.html",
+    "thumb": "thumbs/34.jpg",
+    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; exploring elements of design (shape, line, colour).",
+    "image_size": [
+      1112,
+      1141
+    ]
+  },
+  {
+    "id": "35",
+    "title": "Formline Salmon",
+    "category": "Indigenous Art",
+    "file": "35-formline-salmon.html",
+    "thumb": "thumbs/35.jpg",
+    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; exploring elements of design (shape, line, colour).",
+    "image_size": [
+      1326,
+      1216
+    ]
+  },
+  {
+    "id": "36",
+    "title": "Formline Thunderbird",
+    "category": "Indigenous Art",
+    "file": "36-formline-thunderbird.html",
+    "thumb": "thumbs/36.jpg",
+    "curriculum_link": "Arts Education K-3: traditional and contemporary First Peoples artworks; exploring elements of design (shape, line, colour).",
+    "image_size": [
+      1116,
+      1066
     ]
   }
 ]

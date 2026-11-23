@@ -246,7 +246,7 @@
       <a class="btn btn-home" id="homeBtn" href="index.html" title="Back to all worksheets" aria-label="Home: all worksheets"><span aria-hidden="true">⌂</span><span class="home-txt">Home</span></a>
       <button type="button" class="profile-chip" id="profileChip" title="Guest" aria-label="Current profile: Guest. Switch profile">👤</button>
       <h1 id="title">Worksheet</h1>
-      <span class="site-version" id="siteVersion">Version 1.5</span>
+      <span class="site-version" id="siteVersion">Version 1.6</span>
     </div>
     <div class="chrome-actions">
       <button type="button" class="btn btn-ghost" id="resetBtn" title="Start over">Reset</button>
@@ -366,6 +366,22 @@
     { name: "Purple", hex: "#7b3fbf" }, { name: "Pink", hex: "#ff5aa5" }, { name: "Peach", hex: "#ffc6a8" }, { name: "Tan", hex: "#e0a06b" },
     { name: "Brown", hex: "#8b5330" }, { name: "Gray", hex: "#9aa3ad" }, { name: "Black", hex: "#222222" }, { name: "Erase", hex: "#ffffff", erase: true }
   ];
+
+  function colourList() {
+    var pref = (CONFIG && CONFIG.palette) || [];
+    if (!pref.length) return COLORS;
+    var byName = {};
+    colourList().forEach(function (c) { byName[c.name.toLowerCase()] = c; });
+    var used = {}, out = [];
+    pref.forEach(function (item) {
+      var name = (typeof item === "string" ? item : (item && item.name)) || "";
+      var c = byName[String(name).toLowerCase()];
+      if (!c && item && item.hex && item.name) c = { name: item.name, hex: item.hex, erase: !!item.erase };
+      if (c && !used[c.name]) { out.push(c); used[c.name] = true; }
+    });
+    COLORS.forEach(function (c) { if (!used[c.name]) out.push(c); });
+    return out;
+  }
 
   function $(id) { return document.getElementById(id); }
   var els = {
@@ -1202,6 +1218,7 @@
     load();
     restoreSavedSnapshot();
     buildPalette(); buildWordBank(cfg.word_bank); setupSpeech(cfg);
+    if (cfg.palette_hint && els.paletteHint) els.paletteHint.textContent = cfg.palette_hint;
     renderLabels(); renderLines(); updateOops(); fitSpeech(); fitZoom();
     var img = new Image();
     img.onload = function () {

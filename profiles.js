@@ -1,3 +1,4 @@
+window.WSB_WORKSHEETS = [{"id": "01", "file": "01-welcome-the-salmon.html", "title": "Welcome the Salmon"}, {"id": "02", "file": "02-thank-you-cedar-tree.html", "title": "Thank You, Cedar Tree"}, {"id": "03", "file": "03-canoe-day.html", "title": "Canoe Day"}, {"id": "04", "file": "04-berry-picking-day.html", "title": "Berry Picking Day"}, {"id": "05", "file": "05-storytelling-circle.html", "title": "Storytelling Circle"}, {"id": "06", "file": "06-fall-forest-walk.html", "title": "Fall Forest Walk"}, {"id": "07", "file": "07-butterfly-life-cycle.html", "title": "Butterfly Life Cycle"}, {"id": "08", "file": "08-sunflower-garden.html", "title": "Sunflower Garden"}, {"id": "09", "file": "09-the-water-cycle.html", "title": "The Water Cycle"}, {"id": "10", "file": "10-space-explorer.html", "title": "Space Explorer"}, {"id": "11", "file": "11-magnet-fun.html", "title": "Magnet Fun"}, {"id": "12", "file": "12-tide-pool-explorers.html", "title": "Tide Pool Explorers"}, {"id": "13", "file": "13-dragon-s-cave.html", "title": "Dragon's Cave"}, {"id": "14", "file": "14-build-a-robot.html", "title": "Build a Robot"}, {"id": "15", "file": "15-pirate-ship-adventure.html", "title": "Pirate Ship Adventure"}, {"id": "16", "file": "16-busy-bakery.html", "title": "Busy Bakery"}, {"id": "17", "file": "17-farm-day.html", "title": "Farm Day"}, {"id": "18", "file": "18-dinosaur-day.html", "title": "Dinosaur Day"}, {"id": "19", "file": "19-my-dream-treehouse.html", "title": "My Dream Treehouse"}, {"id": "20", "file": "20-fire-truck-rescue.html", "title": "Fire Truck Rescue"}, {"id": "25", "file": "25-rainy-west-coast-day.html", "title": "Rainy West Coast Day"}, {"id": "26", "file": "26-foggy-harbour-morning.html", "title": "Foggy Harbour Morning"}, {"id": "27", "file": "27-first-snow-in-the-mountains.html", "title": "First Snow in the Mountains"}, {"id": "28", "file": "28-spring-buds-and-birds.html", "title": "Spring Buds and Birds"}, {"id": "29", "file": "29-a-windy-day.html", "title": "A Windy Day"}, {"id": "30", "file": "30-weather-watchers.html", "title": "Weather Watchers"}, {"id": "31", "file": "31-formline-killer-whale.html", "title": "Formline Killer Whale"}, {"id": "32", "file": "32-formline-raven.html", "title": "Formline Raven"}, {"id": "33", "file": "33-formline-eagle.html", "title": "Formline Eagle"}, {"id": "34", "file": "34-formline-bear.html", "title": "Formline Bear"}, {"id": "35", "file": "35-formline-salmon.html", "title": "Formline Salmon"}, {"id": "36", "file": "36-formline-thunderbird.html", "title": "Formline Thunderbird"}];
 /* Worksheet Bank profiles: emoji avatars, up to 5 profiles, 5 saved worksheets each.
    Shared by the home menu and every worksheet. Guest mode keeps the original
    ws-bank:<id>:<hash> autosave keys so existing work is not lost. */
@@ -189,6 +190,23 @@
     return true;
   }
 
+  function knownWorksheetIds() {
+    var list = window.WSB_WORKSHEETS;
+    if (!list || !list.length) return null;
+    var s = {};
+    list.forEach(function (item) {
+      var id = (item && typeof item === "object") ? item.id : item;
+      if (id != null && id !== "") s[String(id)] = true;
+    });
+    return s;
+  }
+
+  function isKnownWorksheet(worksheetId) {
+    var known = knownWorksheetIds();
+    if (!known) return true;
+    return !!known[String(worksheetId)];
+  }
+
   function listSaved(profileId) {
     if (!profileId) return [];
     var prefix = "wsb.p." + profileId + ".saved.";
@@ -199,6 +217,10 @@
         rec = rec || {};
         rec.worksheetId = k.slice(prefix.length);
       }
+      if (!isKnownWorksheet(rec.worksheetId)) {
+        try { localStorage.removeItem(k); } catch (e) {}
+        return;
+      }
       out.push(rec);
     });
     out.sort(function (a, b) { return (b.savedAt || 0) - (a.savedAt || 0); });
@@ -207,6 +229,10 @@
 
   function getSaved(profileId, worksheetId) {
     if (!profileId || !worksheetId) return null;
+    if (!isKnownWorksheet(worksheetId)) {
+      try { localStorage.removeItem(savedKey(profileId, worksheetId)); } catch (e) {}
+      return null;
+    }
     return safeParse(localStorage.getItem(savedKey(profileId, worksheetId)), null);
   }
 
