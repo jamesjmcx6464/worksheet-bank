@@ -1,7 +1,7 @@
 /* Worksheet Bank: register the service worker, offer install, prompt for updates. */
 (function () {
   "use strict";
-  var VERSION = "1.4";
+  var VERSION = "1.5";
   var UPDATE_WAIT_MS = 8000;
   var CHECK_MS = 2 * 60 * 1000;
 

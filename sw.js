@@ -7,7 +7,7 @@
  * and the extensionless URL. index.html is not precached (its 308 to / would
  * fail install).
  */
-const CACHE = "ws-bank-r2-1.4";
+const CACHE = "ws-bank-r2-1.5";
 const PRECACHE = [
   "01-welcome-the-salmon.html",
   "02-thank-you-cedar-tree.html",
@@ -33,6 +33,12 @@ const PRECACHE = [
   "22-formline-orca.html",
   "23-formline-eagle.html",
   "24-formline-salmon.html",
+  "25-rainy-west-coast-day.html",
+  "26-foggy-harbour-morning.html",
+  "27-first-snow-in-the-mountains.html",
+  "28-spring-buds-and-birds.html",
+  "29-a-windy-day.html",
+  "30-weather-watchers.html",
   "thumbs/01.jpg",
   "thumbs/02.jpg",
   "thumbs/03.jpg",
@@ -57,6 +63,12 @@ const PRECACHE = [
   "thumbs/22.jpg",
   "thumbs/23.jpg",
   "thumbs/24.jpg",
+  "thumbs/25.jpg",
+  "thumbs/26.jpg",
+  "thumbs/27.jpg",
+  "thumbs/28.jpg",
+  "thumbs/29.jpg",
+  "thumbs/30.jpg",
   "icons/icon-192.png",
   "icons/icon-512.png",
   "icons/icon-512-maskable.png",

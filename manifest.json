@@ -286,5 +286,77 @@
       1216,
       1364
     ]
+  },
+  {
+    "id": "25",
+    "title": "Rainy West Coast Day",
+    "category": "BC Seasons & Weather",
+    "file": "25-rainy-west-coast-day.html",
+    "thumb": "thumbs/25.jpg",
+    "curriculum_link": "K Science: Daily and seasonal changes affect all living things.",
+    "image_size": [
+      884,
+      1105
+    ]
+  },
+  {
+    "id": "26",
+    "title": "Foggy Harbour Morning",
+    "category": "BC Seasons & Weather",
+    "file": "26-foggy-harbour-morning.html",
+    "thumb": "thumbs/26.jpg",
+    "curriculum_link": "Gr 1 Science: Observable patterns and cycles occur in the local sky and landscape.",
+    "image_size": [
+      1161,
+      1122
+    ]
+  },
+  {
+    "id": "27",
+    "title": "First Snow in the Mountains",
+    "category": "BC Seasons & Weather",
+    "file": "27-first-snow-in-the-mountains.html",
+    "thumb": "thumbs/27.jpg",
+    "curriculum_link": "K Science: Daily and seasonal changes affect all living things; Gr 1 Science: patterns and cycles in the local landscape.",
+    "image_size": [
+      1161,
+      1083
+    ]
+  },
+  {
+    "id": "28",
+    "title": "Spring Buds and Birds",
+    "category": "BC Seasons & Weather",
+    "file": "28-spring-buds-and-birds.html",
+    "thumb": "thumbs/28.jpg",
+    "curriculum_link": "K Science: Daily and seasonal changes affect all living things.",
+    "image_size": [
+      1161,
+      1189
+    ]
+  },
+  {
+    "id": "29",
+    "title": "A Windy Day",
+    "category": "BC Seasons & Weather",
+    "file": "29-a-windy-day.html",
+    "thumb": "thumbs/29.jpg",
+    "curriculum_link": "Gr 1 Science: Observable patterns and cycles occur in the local sky and landscape; K Science: daily changes.",
+    "image_size": [
+      1515,
+      1216
+    ]
+  },
+  {
+    "id": "30",
+    "title": "Weather Watchers",
+    "category": "BC Seasons & Weather",
+    "file": "30-weather-watchers.html",
+    "thumb": "thumbs/30.jpg",
+    "curriculum_link": "Gr 1 Science: Observable patterns and cycles occur in the local sky and landscape; K Science: daily and seasonal changes.",
+    "image_size": [
+      973,
+      1216
+    ]
   }
 ]
