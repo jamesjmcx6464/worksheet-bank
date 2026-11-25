@@ -1,7 +1,7 @@
 /* Worksheet Bank: register the service worker, offer install, prompt for updates. */
 (function () {
   "use strict";
-  var VERSION = "1.6";
+  var VERSION = "1.7";
   var UPDATE_WAIT_MS = 8000;
   var CHECK_MS = 2 * 60 * 1000;
 
@@ -63,7 +63,7 @@
       el.id = "pwa-update";
       el.className = "pwa-update";
       el.setAttribute("role", "status");
-      el.innerHTML = '<p>A new version of Worksheet Bank is ready.<span class="ver"></span></p>'
+      el.innerHTML = '<p>A new version of Picture Story is ready.<span class="ver"></span></p>'
         + '<button type="button" class="later">Later</button>'
         + '<button type="button" class="go">Update</button>';
       el.querySelector(".later").addEventListener("click", function () { dismissed = true; el.remove(); });

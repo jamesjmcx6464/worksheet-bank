@@ -1,6 +1,6 @@
 {
-  "name": "Worksheet Bank",
-  "short_name": "Worksheets",
+  "name": "Picture Story",
+  "short_name": "Picture Story",
   "description": "Colour, label and write worksheets for ages 6 to 8. Pick a colour, fill the picture, then scroll down to write.",
   "start_url": "./",
   "scope": "./",
